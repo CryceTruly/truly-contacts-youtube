@@ -1,16 +1,15 @@
-import axiosInstance from "../../../helpers/axios";
+import axiosInstance from "../../../helpers/axiosInstance";
 import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
 } from "../../../constants/actionTypes";
-
 export const login = ({ password, username }) => (dispatch) => {
   dispatch({
     type: LOGIN_LOADING,
   });
 
-  axiosInstance
+  axiosInstance()
     .post("/auth/login", {
       password,
       username,

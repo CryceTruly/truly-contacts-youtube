@@ -1,19 +1,46 @@
-import React from "react";
-import { Menu, Image, Button, Icon } from "semantic-ui-react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Menu, Image, Button, Icon, Input } from "semantic-ui-react";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
+import logout from "../../context/actions/auth/logout";
+import { GlobalContext } from "../../context/Provider";
+import isAuthenticated from "../../utils/isAuthenticated";
+import searchContacts from "../../context/actions/contacts/searchContacts";
 
 const Header = () => {
   const { pathname } = useLocation();
+  const history = useHistory();
 
-  console.log("location", pathname);
+  const { contactsDispatch: dispatch } = useContext(GlobalContext);
+
+  const handleUserLogout = () => {
+    logout(history)(dispatch);
+  };
+
+  const onChange = (e, { value }) => {
+    const searchText = value.trim().replace(/" "/g, "");
+
+    searchContacts(searchText)(dispatch);
+  };
+
   return (
     <Menu secondary pointing>
       <Image src={logo} width={60} />
       <Menu.Item as={Link} to="/" style={{ fontSize: 24 }}>
         TrulyContacts
       </Menu.Item>
-      {pathname === "/" && (
+
+      {isAuthenticated() && (
+        <Menu.Item position="right">
+          <Input
+            style={{ width: 350 }}
+            placeholder="Search Contacts"
+            onChange={onChange}
+          />
+        </Menu.Item>
+      )}
+
+      {isAuthenticated() && (
         <Menu.Item position="right">
           <Button as={Link} to="/contacts/create" primary basic icon>
             <Icon name="add"></Icon>
@@ -21,10 +48,10 @@ const Header = () => {
           </Button>
         </Menu.Item>
       )}
-      {pathname === "/" && (
+      {isAuthenticated() && (
         <Menu.Item>
           {" "}
-          <Button color="red" basic icon>
+          <Button onClick={handleUserLogout} color="red" basic icon>
             <Icon name="log out"></Icon>
             Logout
           </Button>

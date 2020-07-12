@@ -7,6 +7,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import Header from "../../components/Header";
+import { Link } from "react-router-dom";
 
 const RegisterUI = ({
   form: { onChange, form, registerFormValid, onSubmit, loading, fieldErrors },
@@ -110,6 +111,10 @@ const RegisterUI = ({
                 Submit
               </Button>
             </Form>
+
+            <Segment>
+              Already have an account? <Link to="/auth/login">Login</Link>.
+            </Segment>
           </Segment>
         </Grid.Column>
       </Grid>

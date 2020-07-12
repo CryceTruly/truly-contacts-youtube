@@ -15,13 +15,11 @@ export default () => {
     },
   } = useContext(GlobalContext);
 
-  console.log("error", error);
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
 
-  console.log("form", form);
 
   const loginFormValid = !form.username?.length || !form.password?.length;
 

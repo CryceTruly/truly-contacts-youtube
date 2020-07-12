@@ -30,9 +30,6 @@ export default () => {
     }
   }, [data]);
 
-  console.log("error", error);
-
-  console.log("fieldErrors", fieldErrors);
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });

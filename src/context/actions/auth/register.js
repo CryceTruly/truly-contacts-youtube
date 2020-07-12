@@ -1,4 +1,4 @@
-import axiosInstance from "../../../helpers/axios";
+import axiosInstance from "../../../helpers/axiosInstance";
 import {
   REGISTER_LOADING,
   REGISTER_SUCCESS,
@@ -16,7 +16,7 @@ export const register = ({
     type: REGISTER_LOADING,
   });
 
-  axiosInstance
+  axiosInstance()
     .post("/auth/register", {
       email,
       password,

@@ -8,6 +8,7 @@ import {
   Message,
 } from "semantic-ui-react";
 import Header from "../../components/Header";
+import { Link } from "react-router-dom";
 
 const LoginUI = ({
   form: { onChange, form, loginFormValid, error, onSubmit, loading },
@@ -54,6 +55,10 @@ const LoginUI = ({
               >
                 Submit
               </Button>
+
+              <Segment>
+                Need an account <Link to="/auth/register">Register</Link>.
+              </Segment>
             </Form>
           </Segment>
         </Grid.Column>
